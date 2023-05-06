@@ -23,10 +23,9 @@ app.get('/', (req, res) => {
 })
 
 // entrega uma porta
-const DB_USER = process.env.DB_USER
-const BD_PASSWORD = encodeURIComponent(process.env.BD_PASSWORD)
+const MONGODB_URL = process.env.MONGODB_URL
 
-mongoose.connect(`mongodb+srv://${DB_USER}:${BD_PASSWORD}@cluster0.1bi4sq6.mongodb.net/note-api?retryWrites=true&w=majority`)
+mongoose.connect(MONGODB_URL)
     .then(() => {
         console.log("MongoDB conectado na porta 3000!");
         app.listen(3000);
