@@ -2,7 +2,6 @@
     "name": "note-api",
     "version": "1.0.0",
     "public": true,
-    "description": "A REST API for notes",
     "build": {
         "src": "./server.js",
         "use": "@vercel/node"
