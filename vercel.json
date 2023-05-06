@@ -1,17 +1,15 @@
 {
-    "name": "note-api",
     "version": 2,
-    "public": true,
     "builds": [
         {
-            "src": "*.js",
+            "src": "server.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "./server.js"
+            "dest": "server.js"
         }
     ]
 }
