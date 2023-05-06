@@ -28,7 +28,7 @@ const BD_PASSWORD = encodeURIComponent(process.env.BD_PASSWORD)
 
 mongoose.connect(`mongodb+srv://${DB_USER}:${BD_PASSWORD}@cluster0.1bi4sq6.mongodb.net/note-api?retryWrites=true&w=majority`)
     .then(() => {
-        console.log("MongoDB conectado!");
+        console.log("MongoDB conectado na porta 3000!");
         app.listen(3000);
     })
     .catch((err) => {
