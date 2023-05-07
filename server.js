@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const notesRoutes = require('./routes/notesRoutes');
+const userRoutes = require('./routes/usersRoutes');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
 app.use('/note', notesRoutes);
+app.use('/users', userRoutes);
 
 // rota inicial - endpoint
 app.get('/', (req, res) => {

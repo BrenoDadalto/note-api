@@ -1,11 +1,15 @@
 const Note = require("../models/Note");
+const User = require("../models/User");
 
 const createNote = async (req, res) => {
-    const { title, text } = req.body;
+    const { title, text, email } = req.body;
+
+    const userId = await User.findOne({ email })
 
     const note = {
         title,
         text,
+        userId
     }
 
     try {
@@ -26,7 +30,7 @@ const getAllNotes = async (req, res) => {
 }
 
 const getOneNote = async (req, res) => {
-    const { id } = req.body
+    const id = req.params.id
 
     try {
         const note = await Note.findById({ _id: id });
@@ -38,7 +42,8 @@ const getOneNote = async (req, res) => {
 
 
 const updateNote = async (req, res) => {
-    const { id, title, text } = req.body;
+    const id = req.params.id
+    const { title, text } = req.body;
 
     const note = {
         title,
@@ -54,7 +59,7 @@ const updateNote = async (req, res) => {
 }
 
 const deleteNote = async (req, res) => {
-    const { id } = req.body;
+    const id = req.params.id
 
     try {
         await Note.deleteOne({ _id: id })
