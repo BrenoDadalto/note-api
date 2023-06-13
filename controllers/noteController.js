@@ -6,11 +6,7 @@ const createNote = async (req, res) => {
 
     const userId = await User.findOne({ email })
 
-    const note = {
-        title,
-        text,
-        userId
-    }
+    const note = { title, text, userId }
 
     try {
         await Note.create(note)
@@ -29,7 +25,7 @@ const getAllNotes = async (req, res) => {
     }
 }
 
-const getOneNote = async (req, res) => {
+const getNote = async (req, res) => {
     const id = req.params.id
 
     try {
@@ -45,10 +41,7 @@ const updateNote = async (req, res) => {
     const id = req.params.id
     const { title, text } = req.body;
 
-    const note = {
-        title,
-        text,
-    }
+    const note = { title, text }
 
     try {
         await Note.updateOne({ _id: id }, note)
