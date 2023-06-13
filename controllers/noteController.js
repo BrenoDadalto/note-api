@@ -65,7 +65,7 @@ const deleteNote = async (req, res) => {
 module.exports = {
     createNote,
     getAllNotes,
-    getOneNote,
+    getNote,
     updateNote,
     deleteNote
 };
