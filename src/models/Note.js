@@ -13,6 +13,14 @@ const schema = new mongoose.Schema({
     text: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date()
     }
 });
 
