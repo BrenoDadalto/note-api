@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const cors = require('cors');
 
 const validateToken = require('./src/middleware/validateToken');
 const notesRoutes = require('./src/routes/notesRoutes');
@@ -8,6 +9,8 @@ const userRoutes = require('./src/routes/usersRoutes');
 const authRoutes = require('./src/routes/authRoutes');
 
 const app = express();
+
+app.use(cors());
 
 // middleware leitor de json
 app.use(express.urlencoded({ extended: true }))
