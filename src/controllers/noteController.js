@@ -1,12 +1,18 @@
 const Note = require("../models/Note");
 const User = require("../models/User");
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 const createNote = async (req, res) => {
-    const { title, text, email } = req.body;
+    const { title, text } = req.body;
+    const authHeaders = req.headers['authorization'];
+    const token = authHeaders && authHeaders.split(' ')[1];
 
-    const userId = await User.findOne({ email })
+    const secret = process.env.SECRET;
 
-    const note = { title, text, userId }
+    const token_info = jwt.verify(token, secret);
+    const user = token_info && await User.findById({ _id: token_info.id })
+    const note = { title, text, userId: user._id }
 
     try {
         await Note.create(note)
@@ -17,9 +23,19 @@ const createNote = async (req, res) => {
 }
 
 const getAllNotes = async (req, res) => {
+    const authHeaders = req.headers['authorization'];
+    const token = authHeaders && authHeaders.split(' ')[1];
+
+    const secret = process.env.SECRET;
+
+    const token_info = jwt.verify(token, secret);
+    const user = token_info && await User.findById({ _id: token_info.id })
+
     try {
-        const note = await Note.find();
-        res.status(200).json(note);
+        if (user) {
+            const note = await Note.find({ userId: user._id }).select('-createdAt -updatedAt -__v');
+            res.status(200).json({ message: "Notas buscadas com sucesso", note });
+        }
     } catch (error) {
         res.status(500).json({ error });
     }

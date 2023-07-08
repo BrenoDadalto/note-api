@@ -11,9 +11,7 @@ function validateToken(req, res, next) {
 
     try {
         const secret = process.env.SECRET;
-
         jwt.verify(token, secret)
-
         next()
     } catch (error) {
         return res.status(400).json({ message: "Token invalido!" });
